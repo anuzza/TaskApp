@@ -29,22 +29,45 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection("users").insertMany(
+    // db.collection("users").insertMany(
+    //   [
+    //     {
+    //       name: "Stan",
+    //       age: 25,
+    //     },
+    //     {
+    //       name: "Jen",
+    //       age: 35,
+    //     },
+    //   ],
+    //   (error, result) => {
+    //     if (error) {
+    //       return console.log("Unable to insert documents");
+    //     }
+
+    //     console.log(result);
+    //   }
+    // );
+
+    db.collection("tasks").insertMany(
       [
         {
-          name: "Stan",
-          age: 25,
+          description: "Learn nodeJS",
+          completed: false,
         },
         {
-          name: "Jen",
-          age: 35,
+          description: "Learn Mongodb",
+          completed: false,
+        },
+        {
+          description: "Learn MERN",
+          completed: false,
         },
       ],
       (error, result) => {
         if (error) {
-          return console.log("Unable to insert documents");
+          return console.log("Unable to insert tasks");
         }
-
         console.log(result);
       }
     );
