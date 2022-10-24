@@ -29,16 +29,32 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection("users")
-      .find({ age: 35 })
-      .toArray((error, users) => {
-        console.log(users);
-      });
+    // db.collection("users")
+    //   .find({ age: 35 })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
 
-    db.collection("users")
-      .find({ age: 35 })
-      .count((error, count) => {
-        console.log(count);
+    // db.collection("users")
+    //   .find({ age: 35 })
+    //   .count((error, count) => {
+    //     console.log(count);
+    //   });
+
+    db.collection("tasks").findOne(
+      { _id: new ObjectID("6355dbe1979eb1c69a3fda5b") },
+      (error, task) => {
+        if (error) {
+          return console.log("Unable to fetch");
+        }
+        console.log(task);
+      }
+    );
+
+    db.collection("tasks")
+      .find({ completed: false })
+      .toArray((error, tasks) => {
+        console.log(tasks);
       });
   }
 );
