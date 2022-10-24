@@ -1,12 +1,32 @@
 //CRUD Create Read Update Delete
 
-const mongodb= require('mongodb')
-const MongoClient = mongodb.MongoClient
+const mongodb = require("mongodb");
+const MongoClient = mongodb.MongoClient;
 
-const connectionURL = 'mongodb+srv://anuzza:anuja@cluster0.nv5zq7l.mongodb.net/?retryWrites=true&w=majority'
-const databaseName='task-manager'
+const connectionURL =
+  "mongodb+srv://anuzza:anuja@cluster0.nv5zq7l.mongodb.net/?retryWrites=true&w=majority";
+const databaseName = "task-manager";
 
-MongoClient.connect(connectionURL, {useNewUrlParser: true}, ()=>{
-    
-})
+MongoClient.connect(
+  connectionURL,
+  { useNewUrlParser: true },
+  (error, client) => {
+    if (error) {
+      return console.log("Unable to connect to database!");
+    }
+    const db = client.db(databaseName);
 
+    db.collection("users").insertOne(
+      {
+        name: "Anuja",
+        age: 19,
+      },
+      (error, result) => {
+        if (error) {
+          return console.log("Unable to insert user");
+        }
+        console.log(result);
+      }
+    );
+  }
+);
