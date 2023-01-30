@@ -13,10 +13,35 @@ app.post("/users", (req, res) => {
   user
     .save()
     .then(() => {
-      res.send(user);
+      res.status(201).send(user);
     })
     .catch((error) => {
       res.status(400).send(error.message);
+    });
+});
+
+app.get("/users", (req, res) => {
+  User.find({})
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((e) => {
+      res.status(500).send();
+    });
+});
+
+app.get("/users/:id", (req, res) => {
+  const id = req.params.id;
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send();
+      }
+
+      res.send(user);
+    })
+    .catch((e) => {
+      res.status(500).send();
     });
 });
 
@@ -25,10 +50,34 @@ app.post("/tasks", (req, res) => {
   task
     .save()
     .then(() => {
-      res.send(task);
+      res.status(201).send(task);
     })
     .catch((error) => {
       res.status(400).send(error.message);
+    });
+});
+
+app.get("/tasks", (req, res) => {
+  Task.find({})
+    .then((tasks) => {
+      res.send(tasks);
+    })
+    .catch((e) => {
+      res.status(500).send();
+    });
+});
+
+app.get("/tasks/:id", (req, res) => {
+  const taskId = req.params.id;
+  Task.findById(taskId)
+    .then((task) => {
+      if (!task) {
+        return res.status(404).send();
+      }
+      res.send(task);
+    })
+    .catch((e) => {
+      res.status(500).send();
     });
 });
 
